@@ -1,0 +1,80 @@
+﻿<Window x:Class="CafeOrdering.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CafeOrdering"
+        mc:Ignorable="d"
+        Title="Таколэнд" Width="1366" MinWidth="1366" Height="768" MinHeight="768" WindowState="Maximized"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Loaded="MainWindow_OnLoaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="220" />
+            <RowDefinition Height="75" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#212529">
+            <TextBlock x:Name="TbWelcome" Text="Меню" Foreground="#ffffff" FontSize="22"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button x:Name="BtnExit" Content="Выход" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Margin="20 0 0 0" Padding="30 5"
+                    Background="#ffffff" BorderBrush="#ffffff" Foreground="#212529" FontSize="15"
+                    TextBlock.FontSize="18" Click="BtnExit_OnClick" />
+            <Button x:Name="BtnHistory" Content="История" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="0 0 20 0" Padding="30 5"
+                    Background="#ffffff" BorderBrush="#ffffff" Foreground="#212529" FontSize="15"
+                    TextBlock.FontSize="18" Click="BtnHistory_OnClick" />
+        </Grid>
+
+        <DataGrid x:Name="DataGridProducts" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  FontSize="18"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
+                  AutoGenerateColumns="False" SelectionMode="Single"
+                  RowHeaderWidth="0" Padding="2" HorizontalGridLinesBrush="LightGray" Foreground="#212529"
+                  GridLinesVisibility="Horizontal" RowHeight="35" IsReadOnly="True">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="CmAddCart" Header="Добавить в корзину" Click="CmAddCart_OnClick"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Width="375" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Состав" Width="*" Binding="{Binding Path=Description}" />
+                <DataGridTextColumn Header="Вес" Width="100" Binding="{Binding Path=Weight}" />
+                <DataGridTextColumn Header="Цена" Width="180" Binding="{Binding Path=Price}" />
+                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=Id}" Visibility="Collapsed" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DataGridCart" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  FontSize="18"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
+                  AutoGenerateColumns="False" SelectionMode="Single"
+                  RowHeaderWidth="0" Padding="2" HorizontalGridLinesBrush="LightGray" Foreground="#212529"
+                  GridLinesVisibility="Horizontal" RowHeight="35" IsReadOnly="True">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="CmRemoveCart" Header="Убрать из корзины" Click="CmRemoveCart_OnClick"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Width="*" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Количество" Width="150" Binding="{Binding Path=Quantity}" />
+                <DataGridTextColumn Header="Цена" Width="150" Binding="{Binding Path=Price}" />
+                <DataGridTextColumn Header="Сумма" Width="150" Binding="{Binding Path=Sum}" />
+                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Path=Id}" Visibility="Collapsed" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="3" Background="#212529">
+            <TextBlock x:Name="TbCartSum" Text="Итого: 0" Foreground="#ffffff" Grid.Row="3" HorizontalAlignment="Right"
+                       VerticalAlignment="Center" FontSize="22" Margin="0 0 40 0"/>
+            <Button x:Name="BtnOrder" Content="Заказать" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="0 0 0 0" Padding="50 5"
+                    Background="#ffffff" BorderBrush="#ffffff" Foreground="#212529" FontSize="15"
+                    TextBlock.FontSize="18" Click="BtnOrder_OnClick" />
+        </Grid>
+    </Grid>
+</Window>
